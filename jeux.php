@@ -15,7 +15,7 @@ if (isset($_GET['deconnexion']))
   exit();
 }
 
-$db = new PDO('mysql:host=localhost;dbname=personnagesup', 'root', '');
+$db = new PDO('mysql:host=localhost;dbname=jeux', 'root', 'root');
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 
 $manager = new PersonnagesManager($db);
@@ -227,7 +227,7 @@ if (isset($perso)) // Si on utilise un personnage (nouveau ou pas).
         Type : <?= ucfirst($perso->type()) ?><br />
         Nom : <?= htmlspecialchars($perso->nom()) ?><br />
         Dégâts : <?= $perso->degats() ?><br />
-        Expèrience : <?= $perso->experience() ?><br />
+        Expèrience : <?=  $perso->experience() ?><br />
         Niveau : <?= $perso->niveau() ?><br />
         Création : <?= $perso->date_creation() ?><br />
 <?php

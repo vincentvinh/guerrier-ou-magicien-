@@ -42,17 +42,20 @@ abstract class Personnage
       return self::CEST_MOI;
     }
     
-    if ($this->estEndormi() || $this->estDodo())
+    elseif ($this->estEndormi() || $this->estDodo())
     {
       return self::PERSO_ENDORMI;
     }
-    if ($count == 3)
+    elseif ($count == 3)
     {
       $count = 0;
       return self::TROIS_COUPS;
     }
+    else
+    {
     $count += 1;
     return $perso->recevoirDegats();
+    }
    // return $persoAFrape->retourduBaton();
     
     // On indique au personnage qu'il doit recevoir des dégâts.
@@ -87,9 +90,17 @@ abstract class Personnage
   
   public function recevoirDegats()
   {
-    $this->experience += 25;
+    $this->experience += 5;
 
-    if ($this->niveau == 0)
+    if ($this->degats >= 100)
+    {
+      return self::PERSONNAGE_TUE;
+    }
+    elseif ($this->experience >= 100)
+    {
+      $this->experience = 0;
+    }
+    elseif ($this->niveau == 0)
     {
       $this->degats += 25;
     }
@@ -106,14 +117,7 @@ abstract class Personnage
       $this->degats += 5;
     }
     // Si on a 100 de dégâts ou plus, on supprime le personnage de la BDD.
-    if ($this->degats >= 100)
-    {
-      return self::PERSONNAGE_TUE;
-    }
-    if ($this->experience >= 100)
-    {
-      $this->experience = 0;
-    }
+  
     elseif ($this->niveau <= 2)
     {
       $this->niveau += 1;

@@ -2,6 +2,7 @@
 class PersonnagesManager
 {
   private $db; // Instance de PDO
+
   
   public function __construct($db)
   {
